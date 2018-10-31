@@ -11,7 +11,7 @@
 </template>
 
 <script>
-const url = "http://drupal8.docker.localhost:8000/api/menu_items/main";
+const url = "http://drupal8.docker.localhost:8000/api/menu_items/footer";
 export default {
     
     data: function() {
@@ -31,37 +31,5 @@ export default {
 
 
 <style scoped>
-/* Create slide animation on mobile */
-
-
-ul {
-  list-style: none;
-}
-
-.menu {
-    display: flex;
-
-    &__item {
-        position: relative;
-        padding-right: 3rem;
-
-        &--dropdown {}
-    }
-
-    &__link {
-        //color: $menu_link_color;
-        text-transform: uppercase;
-
-        &:hover {
-            //color: $menu_link_hover_color;
-        }
-
-        &--toggle {}
-    }
-
-    &__icon {
-        margin: 0 !important;
-    }
-}
 
 </style>
