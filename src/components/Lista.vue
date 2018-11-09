@@ -1,4 +1,4 @@
-<template >
+<template>
 
 <div  id="albums">
     <div class="row">
@@ -16,8 +16,7 @@
                                      <p>
                         <strong>titolo:</strong>
                             <span v-html="lista.Titolo"></span></p>
-       
-                        </p>
+                             
                     </div>
                 </div>
             </div>

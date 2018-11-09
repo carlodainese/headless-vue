@@ -33,7 +33,7 @@ export default {
     http: {
         headers: {
             'Accept' : 'json',
-            'Content-Type' : 'application/json',
+            'Content-Type' : 'application/hal+json',
             'X-CSRF-Token' : 'NQtW2PYSlZdFcf2TRdL7ykkxA4YaPcDblA4YMmwOW4Y',
              'Authorization' : 'Basic YWRtaW46YWRtaW4='
         }

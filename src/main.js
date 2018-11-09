@@ -9,14 +9,29 @@ Vue.use(VueRouter)
 Vue.use(VueResource);
 Vue.use(InstantSearch);
 
+Vue.use(Vuex);
+
 //importing comopnets for the routers
 import Lista from './components/Lista'
 import Artist from './components/Artist'
 import Navigation from './components/Navigation'
 import Login from './components/Login'
-import Search from './components/Search'
 import Register from './components/Register'
+import Upload from './components/Upload'
+import ArticleShow from './components/ArticleShow'
+import Contact from './components/Contact'
+import Search from './components/Search'
+import CreateArticle from './components/CreateArticle'
+import EditArticle from './components/EditArticle'
 //declaring routers
+import Vuex from 'vuex'
+import auth from './auth'
+
+
+
+auth.checkAuth()
+
+
 const routes = [
 
     {
@@ -29,25 +44,44 @@ const routes = [
     },
     
     {
-        path: '/l',
+        path: '/login',
         component: Login, Register
 
     },
     
      {
-        path: '/r',
+        path: '/register',
         component: Register, 
 
     },
+        {
+        path: '/upload',
+        component: Upload, 
 
+    },
     {
-        path: '/s',
+        path: '/contact',
+        component: Contact, 
+
+    },
+     {
+        path: '/search',
         component: Search, 
 
-    }
-  
+    },
+       {
+        path: '/create',
+        component: CreateArticle, 
+
+    },
+      { path:'/attivita/:id',component:ArticleShow,name:'article'},
+      { path: '/edit/:id', component: EditArticle,name:'editarticle'},
+        
+
+
+    
 ]
-const router = new VueRouter({
+export const router = new VueRouter({
     routes,
     mode: 'history'
 })
@@ -56,10 +90,14 @@ const router = new VueRouter({
 new Vue({
     el: '#app',
     template: '<App/>',
+    render: h => h(App),
     components: {
         App
     },
     router
 
 }).$mount('#app')
+
+
+
 
