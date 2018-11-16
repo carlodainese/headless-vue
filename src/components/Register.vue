@@ -55,6 +55,7 @@ export default {
                     value: 1
                 }
             }) 
+            
             axios.post('http://drupal8.docker.localhost:8000/user/register', data);
             this.success = true;
             this.name = ''

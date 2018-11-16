@@ -1,0 +1,80 @@
+<template>
+  <div class="container">
+    <div class="alert alert-success" v-if="success">
+    Instructions have been sent to your email address.
+    </div>
+      <form v-on:submit="Reset"> 
+      <label for="">Username:</label>
+              <br>
+          <input type="text" v-model="name">
+          <br>
+          <label for="">Email:</label>
+              <br>
+           <input type="password" v-model="mail">
+           <br>
+           <label for="">Vecchia password:</label>
+              <br>
+        <input type="text" v-model="temp_pass">
+        <br>
+        <label for="">Nuova password:</label>
+              <br>
+        <input type="text" v-model="new_pass">
+      
+          <button type="submit" class="btn btn-success">Resetta</button>
+      </form>
+  </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            name: '',
+            mail: '',
+            temp_pass : '',
+            new_pass:'',
+            success: false
+        }
+    },
+    http: {
+        headers: {
+            'Accept' : 'json',
+            'Content-Type' : 'application/json',
+          
+        }
+    },
+    methods: {
+        Reset: function(e) {
+            
+            e.preventDefault();
+            let data = JSON.stringify({
+                
+                name: {
+                    value : this.name
+                },
+                mail: {
+                    value: this.email
+                },
+                
+                temp_pass: {
+                    value: this.temp_pass
+                },
+                new_pass: {
+                    value: this.new_pass
+                }
+            }) 
+            
+            axios.post('http://drupal8.docker.localhost:8000/user/lost-password?_format=json', data);
+            this.success = true;
+            this.name = ''
+            this.email = ''
+            this.temp_pass = ''
+            this.old_pass = ''
+            console.log('RESET')
+        }
+    }
+}
+</script>
+
+<style>
+</style>

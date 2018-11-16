@@ -1,9 +1,9 @@
 <template>
   <nav>
-      <div id="menu"class="row">  
+  <div id="menu"class="row">  
   <ul class="menu">
           <li class="menu__item" v-for="menuItem in menuItems" :key="menuItem.id" v-bind:class="menuItem.title.toLowerCase()">
-            <router-link v-bind:to="menuItem.uri">{{ menuItem.title}}</router-link>
+            <a v-bind:href="menuItem.uri">{{ menuItem.title}}</a>
           </li>
       </ul>
       </div>
@@ -12,6 +12,8 @@
 
 <script>
 const url = "http://drupal8.docker.localhost:8000/api/menu_items/main";
+
+import auth from '../auth'
 export default {
     
     data: function() {
@@ -31,8 +33,6 @@ export default {
 
 
 <style scoped>
-/* Create slide animation on mobile */
-
 
 ul {
   list-style: none;

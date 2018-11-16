@@ -17,13 +17,10 @@
                         <label for="body" class="control-label">Body:</label>
                         <input v-model="article.body" id="body" name="body" type="text" class="form-control" required="required">
                     </div>
-
-                   
-                    <div class="form-group " style="margin-top: 40px">
-                        <div class="col-md-12">
+                     <div class="col-md-12">
                             <input class="btn btn-primary form-control letter-spcing" type="submit" value="Create">
                         </div>
-                    </div>
+                    
                 </form>
             </div>
         </div>
@@ -34,6 +31,8 @@
 
 
 <script>
+import auth from '../auth'
+import axios from 'axios'
     export default{
       data() {
         return {
@@ -56,30 +55,24 @@
           articlesub(){
            let data = JSON.stringify({
                 
-        _links:{"type":{"href":"http://drupal8.docker.localhost:8000/rest/type/node/article"}
+        _links:{type:{href:"http://drupal8.docker.localhost:8000/rest/type/node/article"}
                 },
-
-                title: {
+                 type: {target_id: "article"},
+        title: {
         value: this.article.title
         },
         body: {
         value: this.article.body
-        },
-
-                type: {target_id: "article"}
-
-              
-                }) 
-            this.$http.post('http://drupal8.docker.localhost:8000/node?_format=hal_json', data,
-                {headers: {
-                    'Content-Type': 'application/hal+json',
-                    'X-CSRF-Token' : '6NBX6-IVNuQ-uDNotBr-YdyNTMyvhZJ3mvgv-yehJHg',
-                    'Authorization' : 'Basic YWRtaW46YWRtaW4='
-              }}).then((response)=>{
-                
+        }
+        });
+  axios.post('http://drupal8.docker.localhost:8000/ entity/node?_format=hal_json', data,
+                {headers:
+                  auth.getAuthHeader()
+              }).then((response)=>{
                 console.log('DONE');
             })
           }
       }
+  
     }
 </script>

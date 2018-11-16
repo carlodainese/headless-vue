@@ -8,7 +8,6 @@ import InstantSearch from 'vue-instantsearch';
 Vue.use(VueRouter)
 Vue.use(VueResource);
 Vue.use(InstantSearch);
-
 Vue.use(Vuex);
 
 //importing comopnets for the routers
@@ -22,11 +21,12 @@ import ArticleShow from './components/ArticleShow'
 import Contact from './components/Contact'
 import Search from './components/Search'
 import CreateArticle from './components/CreateArticle'
+import Reset from './components/Reset'
 import EditArticle from './components/EditArticle'
 //declaring routers
 import Vuex from 'vuex'
 import auth from './auth'
-
+import functions from './functions'
 
 
 auth.checkAuth()
@@ -36,13 +36,9 @@ const routes = [
 
     {
         path: '/',
-        component: Lista, Navigation, Login
+        component: Lista, Navigation, Login, Search
 
-    }, {
-        path: '/artist',
-        component: Artist
-    },
-    
+    }, 
     {
         path: '/login',
         component: Login, Register
@@ -66,7 +62,7 @@ const routes = [
     },
      {
         path: '/search',
-        component: Search, 
+        component: Search,
 
     },
        {
@@ -74,12 +70,16 @@ const routes = [
         component: CreateArticle, 
 
     },
+    {
+        path: '/reset-password',
+        component: Reset, 
+
+    },
+    { path: '*', redirect: '/'},
+
       { path:'/attivita/:id',component:ArticleShow,name:'article'},
       { path: '/edit/:id', component: EditArticle,name:'editarticle'},
-        
-
-
-    
+   
 ]
 export const router = new VueRouter({
     routes,

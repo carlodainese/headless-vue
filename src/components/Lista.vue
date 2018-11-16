@@ -7,7 +7,7 @@
                 
                 <div class="card-body">
                     <h5 class="card-title album_title">  
-                    {{ lista.field_sito}} </h5>
+                    <span>{{lista.field_sito}}</span> </h5>
                     <div class="card-text">
                         <p>
                             <strong>created :</strong>
@@ -38,9 +38,7 @@ export default {
     },
     methods: {
         getLista: function() {
-        console.log("OK");
-    
-            axios.get("http://drupal8.docker.localhost:8000/rest/view/attivita").then(
+         axios.get("http://drupal8.docker.localhost:8000/rest/view/attivita").then(
             response => {
                 this.lista = response.data;
                 console.log(this.lista);
