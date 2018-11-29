@@ -3,12 +3,12 @@
   <div id="menu"class="row">  
   <ul id="menu">
           <li class="menu__item" v-for="menuItem in menuItems" :key="menuItem.id" v-bind:class="menuItem.title.toLowerCase()">
-           
+           <li class="prova" v-for="uri in uri" 
         <a v-bind:href="menuItem.uri">{{ menuItem.title}}</a>
           </li>
            <li class="menu__item">
-        
-           <a href=/create>Crea nuovo contenuto</a></li>
+
+           <a href=/create>Crea nuovo contenuto</a></li></li>
       </ul>
       </div>
   </template>
@@ -24,6 +24,7 @@ export default {
     data: function() {
       return {
           menuItems: [],
+          uri: []
       }
     },
     mounted() {
@@ -34,8 +35,14 @@ export default {
           console.log(this.menuItems[0].uri);
           //@todo ciclare e per ogni elemento pulire l'uri
           for(var i=0;i<this.menuItems.length;i++){
-          this.menuItems[i].uri = functions.cleanUrl(this.menuItems[i].uri);
+          this.uri.push(this.menuItems[i].uri);
           }
+          this.uri=functions.cleanUrlMenu(this.uri);
+          console.log(this.uri);
+          for(var i=0;i<this.menuItems.length;i++){
+          this.menuItems[i].uri=this.uri[i];
+          }
+
         })
     },
 }

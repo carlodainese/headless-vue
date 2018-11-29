@@ -10,11 +10,11 @@
                 <h2 class="text-center">{{this.cleaned_article.title[0].value}}</h2>
            </div>
             <div class="col-md-10 col-md-offset-1 single-page-bottom">
-            <strong>Descrizione:</strong>
+            <strong>Creato il:</strong>
                <span>{{this.cleaned_article.created[0].value}}</span>
                <p><strong>Note:</strong>
                <span v-html="this.note"></span></p>
-               <p><strong>Body:</strong>
+               <p><strong>Descrizione:</strong>
               <span v-html="this.cleaned_article.body[0].value"></span></p>
    </div>
         </div>
