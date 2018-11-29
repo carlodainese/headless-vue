@@ -1,8 +1,9 @@
 <template>
   <div class="container">
-      <h2>Register new user</h2>
+  <div v-if="user.authenticated">
+      <h2>Registrazione</h2>
       <div class="alert alert-success" v-if="success">
-          OK
+          Registrazione effettuata!
       </div>
       <form v-on:submit="registerUser"> 
           <div class="form-group">
@@ -18,6 +19,12 @@
        
           <button type="submit" class="btn btn-success">Create User</button>
       </form>
+      </div>
+        <div v-if="user.authenticated">
+        <h3>
+                       Sei autenticato, effetua il logout per registrare un nuovo account.
+                    </h3>
+        </div>
   </div>
 </template>
 

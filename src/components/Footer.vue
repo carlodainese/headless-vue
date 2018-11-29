@@ -1,13 +1,19 @@
 <template>
-  <nav>
-      <div id="menu"class="row">  
-  <ul class="menu">
+<div class="footer">
+      <nav class="navbar fixed-down navbar-expand-lg justify-content-between"">
+      <br>
+      <ul class="nav navbar-nav">
+      <div id="menu" >  
+      
           <li class="menu__item" v-for="menuItem in menuItems" :key="menuItem.id" v-bind:class="menuItem.title.toLowerCase()">
             <router-link v-bind:to="menuItem.uri">{{ menuItem.title}}</router-link>
           </li>
-      </ul>
+      
       </div>
-  </nav>
+      </ul>
+      </nav>
+      </div>
+      
 </template>
 
 <script>
@@ -31,5 +37,13 @@ export default {
 
 
 <style>
-
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
 </style>

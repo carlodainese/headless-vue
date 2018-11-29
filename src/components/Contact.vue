@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+     <div v-if="user.authenticated">
       <h2>Contact form</h2>
       <form method="POST" @submit.prevent="submitFile" class="setting" accept-charset="UTF-8">
       <div class="form-group">
@@ -32,7 +33,15 @@
       <input class="btn btn-primary form-control letter-spcing" type="submit" value="Create">
 
   </div>
-     </form>   
+
+     </form>
+     
+   </div>
+     <div v-if="!user.authenticated">
+        <h3>
+                       Per compilare il form occorre essere autenticati!
+                    </h3>
+        </div>   
   </div>
 </template>
 
@@ -49,7 +58,8 @@ export default {
             message: '',
             subject: '',
             file: '',
-            success: false
+            success: false,
+            user: auth.user
         }
     },
    
@@ -65,10 +75,13 @@ export default {
 
               
             });
-             axios.post('http://drupal8.docker.localhost:8000/webform_rest/submit?_format=hal_json', data,
-                {headers:
-                  auth.getAuthHeader()
-              }).then((response)=>{
+             axios.post('http://drupal8.docker.localhost:8000/webform_rest/submit?_format=json', data,
+                {headers:{
+                 'Content-Type': 'application/json',
+      'X-CSRF-Token': +localStorage.getItem('csrf'),
+      'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+      'Accept': 'application/json',
+              }}).then((response)=>{
                 console.log('DONE');
                 let formData = new FormData();
 

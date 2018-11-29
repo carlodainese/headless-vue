@@ -1,6 +1,6 @@
 <template>
     <div class="editor expecial">
-        
+        <div v-if="user.authenticated">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 edit">
                 <div class="usersmember-h3">
@@ -24,6 +24,12 @@
                 </form>
             </div>
         </div>
+        </div>
+        <div v-if="!user.authenticated">
+        <h3>
+                       Per creare un nuovo contenuto occorre essere autenticati!
+                    </h3>
+        </div>
     </div>
 
 </template>
@@ -41,34 +47,28 @@ import axios from 'axios'
             body:'',
             title:''
           },
+          user: auth.user,
           type: ''
 
         }
       },
      
-      beforeDestroy() {
-            if(this.editor) {
-                 this.editor.destroy();
-            }
-      },
+     
       methods:{
           articlesub(){
-           let data = JSON.stringify({
-                
-        _links:{type:{href:"http://drupal8.docker.localhost:8000/rest/type/node/article"}
-                },
-                 type: {target_id: "article"},
-        title: {
-        value: this.article.title
-        },
-        body: {
-        value: this.article.body
-        }
-        });
-  axios.post('http://drupal8.docker.localhost:8000/ entity/node?_format=hal_json', data,
-                {headers:
-                  auth.getAuthHeader()
-              }).then((response)=>{
+  let data = JSON.stringify({
+  "type":[{"target_id":"article"}],
+  "title":[{"value": this.article.title}],
+  "body":[{"value": this.article.body}]
+}
+);
+  axios.post('http://drupal8.docker.localhost:8000/node?_format=json', data,{headers:{
+                 'Content-Type': 'application/json',
+                 'Accept': 'application/json',
+      'X-CSRF-Token': +localStorage.getItem('csrf'),
+      'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+     
+              }}).then((response)=>{
                 console.log('DONE');
             })
           }

@@ -1,8 +1,8 @@
+
 <template>
   <div class="search">
-    <h6>Search</h6>
     <form v-on:submit.prevent="getResult(query)">
-      <input type="text" placeholder="Type in your search" v-model="query" />
+      <input type="text" placeholder="Type in your search" v-model="query" /> <img src="../assets/search.png" alt="" height="30" width="30">
     </form>
     <div class="results" v-if="results">
         <div v-for="result in results">

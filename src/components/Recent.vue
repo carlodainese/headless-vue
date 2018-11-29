@@ -1,28 +1,26 @@
 <template>
-
+<div class="responsive">
 <div  id="albums">
     <div class="row">
-        <div class="col-md-3 col-sm-12"  v-for="lista in lista">
+ <ul id="recent">
+    <h6>Contenuti recenti</h6>
+        <div v-for="lista in lista">
             <div class="card">
                 
-                <div class="card-body">
+                    
                     <h5 class="card-title album_title">  
-                    <span>{{lista.field_sito}}</span> </h5>
+                    <span v-html="lista.Titolo"></span></h5>
                     <div class="card-text">
                         <p>
-                            <strong>created :</strong>
-                            <span>{{lista.created}}</span>
-                        </p>
-                                     <p>
-                        <strong>titolo:</strong>
-                            <span v-html="lista.Titolo"></span></p>
-                             
-                    </div>
-                </div>
-            </div>
-            <br>
+                    <strong>created :</strong>
+                    <span>{{lista.created}}</span>
+                    </p> </div>
+              </div>
+           <br>
         </div>
+         </ul>
     </div>
+</div>
 </div>
 </template>
 
@@ -38,7 +36,9 @@ export default {
     },
     methods: {
         getLista: function() {
-         axios.get("http://drupal8.docker.localhost:8000/rest/view/attivita").then(
+         axios.get("http://drupal8.docker.localhost:8000/rest/view/attivita",{headers: {
+                'Accept' : 'application/json'
+              }}).then(
             response => {
                 this.lista = response.data;
                 console.log(this.lista);
@@ -51,3 +51,12 @@ export default {
     }
 };
 </script>
+<style>
+.card
+{
+ box-shadow: 1px 1px 20px  1px #ddd;
+ border:1px solid #ddd;
+ width: 300px;
+ border-radius: 10px;
+}
+</style>

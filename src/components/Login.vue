@@ -2,19 +2,15 @@
 <template>
  <div>
     <div v-if="!user.authenticated">
-        <h3>Login</h3>
+          
         <input type="text" v-model="name">
         <input type="password" v-model="pass">
-        <br>
+      
         <button @click="LogIn">Login</button>
-        <router-link v-bind:to="reset-password">Hai dimenticato la password?</router-link>
-    </div>
-    
-    <div v-if="user.authenticated">
-        Hello {{this.name}}
         <br>
-        <button @click="LogOut">Logout</button>
-   </div>
+        <router-link to="/reset-password">Hai dimenticato la password?</router-link>
+    
+    </div>
   </div>
 </template>
 
@@ -42,8 +38,7 @@ export default {
     http: {
         headers: {
             'Accept' : 'json',
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': 'U1rd59lpFYzcoZqqdmu-ZlHvUW_ioTkL55rqwvjhlck'
+            'Content-Type': 'application/json'
         }
     },
 
@@ -51,25 +46,16 @@ export default {
 
 
    methods: {
-    getJWT(){this.$http.get('http://drupal8.docker.localhost:8000/jwt/token?_format=json',{ headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token':this.csrfToken,
-                    }})
-            .then(response => {
-             this.jwt = response.data.token;
-            console.log('JWTTT');
-            console.log('this.jwt');});
-            },
 
-        LogIn(){
-        
-            let data = JSON.stringify({
+    LogIn(){
+        let data = JSON.stringify({
                 name: this.name,
                 pass: this.pass
             });
             axios.post(this.urlIn , data, {
                 headers: {
                     'Content-Type': 'application/json',
+                     'Accept': 'application/json',
                    },
                 }
             )
@@ -77,44 +63,30 @@ export default {
                 this.response = response.data;
                 this.csrfToken = response.data.csrf_token;
                 this.logoutToken = response.data.logout_token;
-                console.log(this.logoutToken)
-                
+                this.name = response.data.current_user.name;
+                localStorage.setItem('name', this.name)
+                auth.getName(this.name);
                 {this.$http.get('http://drupal8.docker.localhost:8000/jwt/token?_format=json',{ headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-Token': this.csrfToken,
-                    'Authorization' : 'Basic YWRtaW46YWRtaW4='
+                    'Authorization' : 'Basic aWxlbjppbGVu='
                     }})
             .then(response => {
              this.jwt = response.data.token;
-           
-            console.log('JWTTT');
-            auth.login(this.jwt, this.csrfToken);
-           });
+            console.log('JWT');
+            auth.login(this.jwt, this.csrfToken,this.logoutToken);
+             window.location.reload();
+         });
             }
             });
             console.log('Logged In !');
+            
            
         },
 
-   
-
-        LogOut() {
-            axios.post('http://drupal8.docker.localhost:8000/user/logout?_format=json', {
-                credentials: "same-origin",
-                    headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': this.csrfToken,
-
-                    },
-                }
-            );
-            this.name = ''
-            this.pass = ''
-            auth.logout();
-            console.log('Logged Out !');
-        }
-    }
+    
+}
 }
 </script>
 
-<style>
+

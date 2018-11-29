@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+  <div v-if="!user.authenticated">
     <div class="alert alert-success" v-if="success">
     Instructions have been sent to your email address.
     </div>
@@ -22,6 +23,13 @@
       
           <button type="submit" class="btn btn-success">Resetta</button>
       </form>
+      </div>
+
+       <div v-if="user.authenticated">
+        <h3>
+                       Sei autenticato, il reset password non è possibile.
+                    </h3>
+        </div>
   </div>
 </template>
 
