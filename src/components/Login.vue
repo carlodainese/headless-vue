@@ -8,7 +8,8 @@
       
         <button @click="LogIn">Login</button>
         <br>
-        <router-link to="/reset-password">Hai dimenticato la password?</router-link>
+        <a href="/reset-password">Hai dimenticato la password?</a>
+        <a href="/register">Registrati!</a>
     
     </div>
   </div>

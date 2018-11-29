@@ -4,6 +4,7 @@
     <div class="alert alert-success" v-if="success">
     Instructions have been sent to your email address.
     </div>
+    <h4> Procedi per resettare la password </h4>
       <form v-on:submit="Reset"> 
       <label for="">Username:</label>
               <br>
@@ -20,7 +21,8 @@
         <label for="">Nuova password:</label>
               <br>
         <input type="text" v-model="new_pass">
-      
+      <br>
+      <br>
           <button type="submit" class="btn btn-success">Resetta</button>
       </form>
       </div>
@@ -34,6 +36,7 @@
 </template>
 
 <script>
+import auth from '../auth'
 export default {
     data() {
         return {
@@ -41,7 +44,8 @@ export default {
             mail: '',
             temp_pass : '',
             new_pass:'',
-            success: false
+            success: false,
+            user: auth.user
         }
     },
     http: {

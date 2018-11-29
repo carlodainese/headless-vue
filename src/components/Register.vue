@@ -1,10 +1,11 @@
 <template>
   <div class="container">
-  <div v-if="user.authenticated">
+  <div v-if="!user.authenticated">
       <h2>Registrazione</h2>
       <div class="alert alert-success" v-if="success">
           Registrazione effettuata!
       </div>
+    
       <form v-on:submit="registerUser"> 
           <div class="form-group">
               <label for="">Username:</label>
@@ -16,7 +17,7 @@
               <br>
               <input type="email" v-model="email" name="" class="form-control">
           </div>
-       
+       <br>
           <button type="submit" class="btn btn-success">Create User</button>
       </form>
       </div>
@@ -29,12 +30,15 @@
 </template>
 
 <script>
+import auth from '../auth'
 export default {
     data() {
         return {
             name: '',
             email: '',
-            success: false
+            success: false,
+            user: auth.user
+
         }
     },
     http: {

@@ -6,9 +6,7 @@
            <li class="prova" v-for="uri in uri" 
         <a v-bind:href="menuItem.uri">{{ menuItem.title}}</a>
           </li>
-           <li class="menu__item">
-
-           <a href=/create>Crea nuovo contenuto</a></li></li>
+           </li>
       </ul>
       </div>
   </template>

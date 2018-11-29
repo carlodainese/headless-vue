@@ -5,7 +5,7 @@
             <div class="col-md-8 col-md-offset-2 edit">
                 <div class="usersmember-h3">
                     <h3>
-                        Edit Article
+                        Edit di un contenuto
                     </h3>
                 </div>
                 <form method="POST" @submit.prevent="articlesub" class="setting" accept-charset="UTF-8">

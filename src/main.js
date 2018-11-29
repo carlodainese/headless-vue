@@ -12,7 +12,6 @@ Vue.use(Vuex);
 
 //importing comopnets for the routers
 import Lista from './components/Lista'
-import Artist from './components/Artist'
 import Navigation from './components/Navigation'
 import Login from './components/Login'
 import Logout from './components/Logout'
@@ -51,11 +50,7 @@ const routes = [
         component: Login, Logout, Register
 
     },
-    {
-        path: '/prova',
-        component: Artist
-
-    },
+    
     
      {
         path: '/register',
@@ -78,7 +73,7 @@ const routes = [
 
     },
        {
-        path: '/create',
+        path: '/node/add/attivita',
         component: CreateArticle, 
 
     },
@@ -98,6 +93,7 @@ const routes = [
 
       { path:'/attivita/:id',
         component: ArticleShow, Recent},
+
       { path: '/edit/:id', component: EditArticle,name:'editarticle'},
    
 ]
