@@ -67,6 +67,7 @@ export default {
                 this.name = response.data.current_user.name;
                 localStorage.setItem('name', this.name)
                 auth.getName(this.name);
+                //richiesta http per get
                 {this.$http.get('http://drupal8.docker.localhost:8000/jwt/token?_format=json',{ headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-Token': this.csrfToken,
@@ -74,9 +75,9 @@ export default {
                     }})
             .then(response => {
              this.jwt = response.data.token;
-            console.log('JWT');
+            console.log('JWT ottenuto');
             auth.login(this.jwt, this.csrfToken,this.logoutToken);
-             window.location.reload();
+            window.location.reload();
          });
             }
             });

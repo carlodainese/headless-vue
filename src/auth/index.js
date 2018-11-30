@@ -6,7 +6,7 @@ export default {
     name: localStorage.getItem('name')
   },
 
-  checkAuth() {
+  checkAuth() { //metodo di controllo di autenticazione
     var a = localStorage.getItem('id_token')
     if(a) {
       this.user.authenticated = true
@@ -22,7 +22,7 @@ export default {
     this.user.name= localStorage.getItem('name');
     this.user.authenticated = true
   },
-  logout() {
+  logout() { //pulizia localstorage
     localStorage.removeItem('id_token')
     localStorage.removeItem('csrf')
     localStorage.removeItem('log')
@@ -33,7 +33,7 @@ export default {
     this.user.name= localStorage.getItem('name');
     },
 
-  getAuthHeader() {
+  getAuthHeader() { //header per richiesta http per l'utente autenticato
   
     return {
       'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export default {
       }
    },
 
-  setHeader(){
+  setHeader(){ //header per accedere a richieste a seconda se l'utente è autenticato o no
     if(this.user.authenticated) return {
     'Accept' : 'application/hal+json',
                 'X-CSRF-Token': +localStorage.getItem('csrf'),

@@ -31,7 +31,7 @@ export default {
         .then((data) => {
           this.menuItems = data;
           console.log(this.menuItems[0].uri);
-          //@todo ciclare e per ogni elemento pulire l'uri
+          //cicla e per ogni elemento pulisce l'uri
           for(var i=0;i<this.menuItems.length;i++){
           this.uri.push(this.menuItems[i].uri);
           }

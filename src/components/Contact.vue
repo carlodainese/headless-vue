@@ -2,7 +2,7 @@
   <div class="container">
      <div v-if="user.authenticated">
       <h2>Contact form</h2>
-      <form method="POST" @submit.prevent="submitFile" class="setting" accept-charset="UTF-8">
+      <form method="POST" @submit.prevent="submitForm" class="setting" accept-charset="UTF-8">
       <div class="form-group">
               <label for="">Name:</label>
               <br>
@@ -64,7 +64,9 @@ export default {
     },
    
     methods: {
-        submitFile(){
+
+//metodo che compila form e fa l'upload dei dati
+submitForm(){
         let data = JSON.stringify({
                 webform_id: "contact",
                 name: this.name,
@@ -75,22 +77,19 @@ export default {
 
               
             });
-             axios.post('http://drupal8.docker.localhost:8000/webform_rest/submit?_format=json', data,
-                {headers:{
+axios.post('http://drupal8.docker.localhost:8000/webform_rest/submit?_format=json', data,
+ {headers:{
                  'Content-Type': 'application/json',
       'X-CSRF-Token': +localStorage.getItem('csrf'),
       'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
       'Accept': 'application/json',
               }}).then((response)=>{
-                console.log('DONE');
-                let formData = new FormData();
-
-            formData.append('file', this.file);
-
-            axios.post("http://drupal8.docker.localhost:8000/form/contact/",
-                formData,
-                {
-                headers: {
+console.log('DONE');
+let formData = new FormData();
+formData.append('file', this.file);
+ //richiesta per upload di un file
+axios.post("http://drupal8.docker.localhost:8000/form/contact/", formData,{
+          headers: {
                     'Content-Type': 'multipart/form-data',
                     'X-CSRF-Token' : 'raDBcbXRzZ5NAZLpZP34OVpO-XIh_RB3z3LJefg6FxE' }
               }
@@ -100,8 +99,8 @@ export default {
             })
       },
 
-
- A(){let formData = new FormData();
+//funzione per fare un upload separato
+ Upload(){let formData = new FormData();
 
             formData.append('file', this.file);
 
@@ -117,7 +116,8 @@ export default {
         });
       },
 
-      handleFileUpload(){
+//caricamento file
+handleFileUpload(){
       
         this.file = this.$refs.file.files[0];
       }
@@ -125,6 +125,3 @@ export default {
   }
 </script>
 
-<style>
-    
-</style>

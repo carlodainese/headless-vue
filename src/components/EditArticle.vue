@@ -1,7 +1,8 @@
+//non raggiungibile attraverso la navigazione del menù raggiungibile attraverso il routing dichiarato in main.js
+
 <template>
     <div class="editor expecial">
-        
-        <div class="row">
+    <div class="row">
             <div class="col-md-8 col-md-offset-2 edit">
                 <div class="usersmember-h3">
                     <h3>
@@ -31,12 +32,6 @@
 
 </template>
 
-<style>
-    .panel-body{
-        padding:0;
-    }
-</style>
-
 <script>
 
     export default{
@@ -65,3 +60,9 @@
       }
     }
 </script>
+
+<style>
+    .panel-body{
+        padding:0;
+    }
+</style>
